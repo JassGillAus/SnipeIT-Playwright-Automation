@@ -2,6 +2,7 @@
 using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using SnipeIT.Playwright.Automation.Pages;
+using NUnit.Framework.Interfaces;
 
 namespace SnipeIT.Playwright.Automation;
 
@@ -25,6 +26,41 @@ public partial class Tests : PageTest
         };
 
     }
+
+    #region Setup and Teardown
+
+    [SetUp]
+    public async Task StartTracingAsync()
+    {
+        // await Context.Tracing.StartAsync(new()
+        // {
+        //     Title = TestContext.CurrentContext.Test.Name,
+        //     Screenshots = true,
+        //     Snapshots = true,
+        //     Sources = true
+        // });
+    }
+
+    [TearDown]
+    public async Task StopTracingAsync()
+    {
+        // if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+        // {
+        //     string PathofDirectory = "/TestResults";
+        //     Directory.CreateDirectory(PathofDirectory);
+
+        //     await Context.Tracing.StopAsync(new()
+        //     {
+        //         Path = Path.Combine(PathofDirectory, "trace.zip")
+        //     });
+        // }
+        // else
+        // {
+        //     await Context.Tracing.StopAsync();
+        // }
+    }
+    #endregion Setup and Teardown
+
     /// <summary>
     /// This is Asset Creation workflow involving Login, asset creation, Asset Search & Detail verification workflow
     /// </summary>
@@ -36,7 +72,7 @@ public partial class Tests : PageTest
         #region Declarations
         // Instantiate our TestData Object (which will hold asset test data)
         AssetTestData objTestData = new();
-        
+
         // Instantiate All the Page Objects we need
         LoginPage objLoginPage = new(Page);
         DashboardPage objDashboardPage = new(Page);
@@ -44,6 +80,8 @@ public partial class Tests : PageTest
         AssetListpage objAssetListPage = new(Page);
         AssetDetailsPage objAssetDetailsPage = new(Page);
         #endregion Declarations
+
+
 
         #region LoginPage
         // Step 1. Lets Load Website and Validate if correct website loads
@@ -130,7 +168,7 @@ public partial class Tests : PageTest
         await Expect(AssetModelLocator).ToBeAttachedAsync();
         Console.WriteLine("Detail Page: Asset Model Found & Matched");
 
-        
+
         // Step 8:Navigate to History Tab, Validate that History records asset creation and Checkout
         await objAssetDetailsPage.NAvigateto_HistoryTab();
         ILocator ActivityRecordLocator = await objAssetDetailsPage.VerifyAssetDetails_onHistoryTab("create new");
