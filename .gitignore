@@ -1,0 +1,24 @@
+# .NET build outputs
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+
+# VS Code local settings
+.vscode/
+
+# Test results
+TestResults/
+playwright-report/
+test-results/
+
+# Playwright local files
+playwright/.cache/
+
+# Secrets and environment variables
+.env
+.env.*
+**/auth.json

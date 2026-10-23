@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <TestRunParameters>
+    <Parameter name="BaseURL" value="https://demo.snipeitapp.com" />
+  </TestRunParameters>
+  <RunConfiguration>
+    <ResultsDirectory>TestResults</ResultsDirectory>
+  </RunConfiguration>
+<LoggerRunSettings>
+    <Loggers>
+      <Logger friendlyName="trx" enabled="True">
+        <Configuration>
+          <LogFileName>TestResults.trx</LogFileName>
+        </Configuration>
+      </Logger>
+    </Loggers>
+  </LoggerRunSettings>
+<Playwright>
+    <BrowserName>chromium</BrowserName>
+    <ExpectTimeout>30000</ExpectTimeout>
+  </Playwright>
+</RunSettings>
